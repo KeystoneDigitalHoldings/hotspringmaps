@@ -15,7 +15,6 @@
     "incremental": true,
     "types": ["node"],
 
-    // 👇 Added alias settings
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
