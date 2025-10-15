@@ -1,0 +1,16 @@
+﻿node_modules/
+.next/
+out/
+.next/cache/
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Vercel
+.vercel

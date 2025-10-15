@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Brand base styles */
+:root {
+  --brand-forest: #2E5538;
+  --brand-moss: #4CA000;
+  --brand-aqua: #4CA0A0;
+  --brand-stone: #E3EAE2;
+  --brand-earth: #6F4C3E;
+}
+
+html, body {
+  height: 100%;
+  background: var(--brand-stone);
+  color: #1F2937; /* gray-800 */
+}
+
+.container {
+  @apply mx-auto max-w-6xl px-4;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center rounded-lg px-5 py-3 font-medium transition;
+}
+.btn-primary {
+  @apply bg-brand-forest text-white hover:bg-emerald-900;
+}
+.btn-secondary {
+  @apply bg-brand-aqua text-white hover:opacity-90;
+}
+.card {
+  @apply rounded-xl border border-gray-200 bg-white p-6 shadow-sm;
+}
