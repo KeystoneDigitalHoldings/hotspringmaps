@@ -5,3 +5,4 @@ export default function TermsPage() {
       <p>By using HotSpringMaps you agree to our community guidelines.</p>
     </section>
   );
+}
