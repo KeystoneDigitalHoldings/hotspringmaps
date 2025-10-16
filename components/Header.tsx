@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { supabase } from '../lib/supabase-browser'; // 👇 Import Supabase client
 
 function NavLink({
   href,
@@ -16,7 +17,7 @@ function NavLink({
   const pathname = usePathname();
   const isActive =
     pathname === href ||
-    (href !== '/' && pathname?.startsWith(href)); // highlight parents
+    (href !== '/' && pathname?.startsWith(href));
 
   return (
     <Link
@@ -34,9 +35,27 @@ function NavLink({
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState<string | null>(null); // 👇 Track Supabase user session
 
-  // Close menu when route changes or on Escape
   const pathname = usePathname();
+
+  // 👇 Fetch session when component loads
+  useEffect(() => {
+    const init = async () => {
+      const { data } = await supabase.auth.getSession();
+      setUser(data.session?.user?.email ?? null);
+
+      // Subscribe to auth changes
+      const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+        setUser(session?.user?.email ?? null);
+      });
+
+      return () => sub.subscription.unsubscribe();
+    };
+    init();
+  }, []);
+
+  // Close menu when navigating or pressing Esc
   useEffect(() => setOpen(false), [pathname]);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
@@ -62,7 +81,12 @@ export default function Header() {
           <NavLink href="/explore">Explore</NavLink>
           <NavLink href="/community">Community</NavLink>
           <NavLink href="/about">About</NavLink>
-          <NavLink href="/account">Account</NavLink>
+          {/* 👇 Dynamic link */}
+          {user ? (
+            <NavLink href="/account">Account</NavLink>
+          ) : (
+            <NavLink href="/account">Sign in</NavLink>
+          )}
         </nav>
 
         {/* Mobile hamburger */}
@@ -97,7 +121,12 @@ export default function Header() {
             <NavLink href="/explore" onClick={() => setOpen(false)}>Explore</NavLink>
             <NavLink href="/community" onClick={() => setOpen(false)}>Community</NavLink>
             <NavLink href="/about" onClick={() => setOpen(false)}>About</NavLink>
-            <NavLink href="/account" onClick={() => setOpen(false)}>Account</NavLink>
+            {/* 👇 Dynamic link for mobile */}
+            {user ? (
+              <NavLink href="/account" onClick={() => setOpen(false)}>Account</NavLink>
+            ) : (
+              <NavLink href="/account" onClick={() => setOpen(false)}>Sign in</NavLink>
+            )}
           </nav>
         </div>
       )}
