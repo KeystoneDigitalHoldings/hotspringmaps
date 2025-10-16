@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { supabase } from '../lib/supabase-browser'; // 👇 Import Supabase client
+import { supabase } from '../lib/supabase-browser';
 
 function NavLink({
   href,
@@ -35,19 +35,18 @@ function NavLink({
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const [user, setUser] = useState<string | null>(null); // 👇 Track Supabase user session
+  const [user, setUser] = useState<any>(null); // store Supabase user object
 
   const pathname = usePathname();
 
-  // 👇 Fetch session when component loads
+  // Fetch Supabase session + listen for auth changes
   useEffect(() => {
     const init = async () => {
       const { data } = await supabase.auth.getSession();
-      setUser(data.session?.user?.email ?? null);
+      setUser(data.session?.user ?? null);
 
-      // Subscribe to auth changes
-      const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
-        setUser(session?.user?.email ?? null);
+      const { data: sub } = supabase.auth.onAuthStateChange((_evt, session) => {
+        setUser(session?.user ?? null);
       });
 
       return () => sub.subscription.unsubscribe();
@@ -55,7 +54,7 @@ export default function Header() {
     init();
   }, []);
 
-  // Close menu when navigating or pressing Esc
+  // Close mobile menu on navigation / Esc
   useEffect(() => setOpen(false), [pathname]);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
@@ -76,20 +75,27 @@ export default function Header() {
           HotSpringMaps
         </Link>
 
-        {/* Desktop nav */}
+        {/* Desktop navigation */}
         <nav className="hidden items-center gap-1 md:flex">
           <NavLink href="/explore">Explore</NavLink>
           <NavLink href="/community">Community</NavLink>
           <NavLink href="/about">About</NavLink>
-          {/* 👇 Dynamic link */}
-          {user ? (
-            <NavLink href="/account">Account</NavLink>
-          ) : (
-            <NavLink href="/account">Sign in</NavLink>
-          )}
+
+          {/* Dynamic Account / Sign-in */}
+          <div className="flex items-center gap-2">
+            <NavLink href="/account">{user ? 'Account' : 'Sign in'}</NavLink>
+            {user?.user_metadata?.avatar_url && (
+              <img
+                src={user.user_metadata.avatar_url}
+                alt="User avatar"
+                referrerPolicy="no-referrer"
+                className="h-8 w-8 rounded-full border border-gray-300"
+              />
+            )}
+          </div>
         </nav>
 
-        {/* Mobile hamburger */}
+        {/* Hamburger (mobile) */}
         <button
           type="button"
           aria-label="Open menu"
@@ -118,15 +124,28 @@ export default function Header() {
       {open && (
         <div className="border-t border-gray-200 bg-white md:hidden">
           <nav className="container grid gap-1 py-2">
-            <NavLink href="/explore" onClick={() => setOpen(false)}>Explore</NavLink>
-            <NavLink href="/community" onClick={() => setOpen(false)}>Community</NavLink>
-            <NavLink href="/about" onClick={() => setOpen(false)}>About</NavLink>
-            {/* 👇 Dynamic link for mobile */}
-            {user ? (
-              <NavLink href="/account" onClick={() => setOpen(false)}>Account</NavLink>
-            ) : (
-              <NavLink href="/account" onClick={() => setOpen(false)}>Sign in</NavLink>
-            )}
+            <NavLink href="/explore" onClick={() => setOpen(false)}>
+              Explore
+            </NavLink>
+            <NavLink href="/community" onClick={() => setOpen(false)}>
+              Community
+            </NavLink>
+            <NavLink href="/about" onClick={() => setOpen(false)}>
+              About
+            </NavLink>
+            <div className="flex items-center gap-2 px-3 py-2">
+              <NavLink href="/account" onClick={() => setOpen(false)}>
+                {user ? 'Account' : 'Sign in'}
+              </NavLink>
+              {user?.user_metadata?.avatar_url && (
+                <img
+                  src={user.user_metadata.avatar_url}
+                  alt="User avatar"
+                  referrerPolicy="no-referrer"
+                  className="h-8 w-8 rounded-full border border-gray-300"
+                />
+              )}
+            </div>
           </nav>
         </div>
       )}
