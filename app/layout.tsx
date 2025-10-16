@@ -11,7 +11,7 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.hotspringmaps.com'),
+  metadataBase: new URL('https://app.hotspringmaps.com'),
   title: 'HotSpringMaps.com — Find, Share & Soak',
   description:
     'Discover natural hot springs around the world. Plan trips, read reviews, and connect with the soaking community.',
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description:
       'Discover natural hot springs around the world. Plan trips, read reviews, and connect with the soaking community.',
     type: 'website',
-    url: 'https://www.hotspringmaps.com',
+    url: 'https://app.hotspringmaps.com',
     siteName: 'HotSpringMaps',
   },
   twitter: {
@@ -31,12 +31,21 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
       <body className={dmSans.className}>
+        {/* Header appears on every page */}
         <Header />
+
+        {/* Main page content area */}
         <main className="container py-10">{children}</main>
+
+        {/* Footer appears site-wide */}
         <Footer />
       </body>
     </html>
