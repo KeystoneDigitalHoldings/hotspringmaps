@@ -10,12 +10,11 @@ const config: Config = {
       colors: {
         brand: {
           forest: '#2E5538',
-          moss: '#4CA000',
-          aqua: '#4CA0A0',
-          stone: '#E3EAE2',
-          earth: '#6F4C3E'
-        }
-      }
+          aqua:   '#4CBEBE',
+          stone:  '#F5F5F0',
+          sand:   '#E9E6DD',
+        },
+      },
     },
   },
   plugins: [],
