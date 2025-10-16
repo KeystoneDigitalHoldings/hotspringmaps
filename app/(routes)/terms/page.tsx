@@ -1,8 +1,8 @@
-export default function PrivacyPage() {
+export default function TermsPage() {
   return (
     <section className="prose max-w-none">
-      <h1>Privacy Policy</h1>
-      <p>This is a placeholder. We’ll finalize this policy before launch.</p>
+      <h1>Terms of Service</h1>
+      <p>By using HotSpringMaps you agree to our community guidelines.</p>
     </section>
   );
 }
