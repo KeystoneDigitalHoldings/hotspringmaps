@@ -1,20 +1,106 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
+function NavLink({
+  href,
+  children,
+  onClick,
+}: {
+  href: string;
+  children: React.ReactNode;
+  onClick?: () => void;
+}) {
+  const pathname = usePathname();
+  const isActive =
+    pathname === href ||
+    (href !== '/' && pathname?.startsWith(href)); // highlight parents
+
+  return (
+    <Link
+      href={href}
+      onClick={onClick}
+      className={`block rounded-lg px-3 py-2 text-sm font-medium transition
+        ${isActive
+          ? 'bg-brand-aqua/15 text-brand-forest'
+          : 'text-gray-700 hover:text-brand-forest hover:bg-brand-aqua/10'}`}
+    >
+      {children}
+    </Link>
+  );
+}
 
 export default function Header() {
+  const [open, setOpen] = useState(false);
+
+  // Close menu when route changes or on Escape
+  const pathname = usePathname();
+  useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
   return (
-    <header className="border-b border-gray-200 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60 sticky top-0 z-50">
+    <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 font-semibold text-brand-forest">
+        {/* Brand */}
+        <Link
+          href="/"
+          className="flex items-center gap-2 font-semibold text-brand-forest"
+          aria-label="HotSpringMaps home"
+        >
           <span className="inline-block h-6 w-6 rounded-full bg-brand-aqua" aria-hidden />
           HotSpringMaps
         </Link>
-        <nav className="flex items-center gap-6 text-sm font-medium">
-          <Link href="/explore" className="hover:text-brand-forest">Explore</Link>
-          <Link href="/community" className="hover:text-brand-forest">Community</Link>
-          <Link href="/about" className="hover:text-brand-forest">About</Link>
-          <Link href="/account" className="btn btn-secondary text-sm">Account</Link>
+
+        {/* Desktop nav */}
+        <nav className="hidden items-center gap-1 md:flex">
+          <NavLink href="/explore">Explore</NavLink>
+          <NavLink href="/community">Community</NavLink>
+          <NavLink href="/about">About</NavLink>
+          <NavLink href="/account">Account</NavLink>
         </nav>
+
+        {/* Mobile hamburger */}
+        <button
+          type="button"
+          aria-label="Open menu"
+          aria-expanded={open}
+          onClick={() => setOpen(!open)}
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-300 bg-white text-gray-700 transition hover:border-brand-forest hover:text-brand-forest md:hidden"
+        >
+          <svg
+            className={`h-5 w-5 transition ${open ? 'rotate-90' : ''}`}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          >
+            {open ? (
+              <path d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path d="M3 6h18M3 12h18M3 18h18" />
+            )}
+          </svg>
+        </button>
       </div>
+
+      {/* Mobile drawer */}
+      {open && (
+        <div className="border-t border-gray-200 bg-white md:hidden">
+          <nav className="container grid gap-1 py-2">
+            <NavLink href="/explore" onClick={() => setOpen(false)}>Explore</NavLink>
+            <NavLink href="/community" onClick={() => setOpen(false)}>Community</NavLink>
+            <NavLink href="/about" onClick={() => setOpen(false)}>About</NavLink>
+            <NavLink href="/account" onClick={() => setOpen(false)}>Account</NavLink>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
