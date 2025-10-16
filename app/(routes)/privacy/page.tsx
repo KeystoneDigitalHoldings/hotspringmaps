@@ -5,4 +5,3 @@ export default function PrivacyPage() {
       <p>This is a placeholder. We’ll finalize this policy before launch.</p>
     </section>
   );
-}
