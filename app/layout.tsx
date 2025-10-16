@@ -48,4 +48,6 @@ export default function RootLayout({
         {/* Footer appears site-wide */}
         <Footer />
       </body>
-    
+    </html>
+  )
+}
