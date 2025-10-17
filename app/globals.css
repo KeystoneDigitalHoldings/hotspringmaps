@@ -2,39 +2,84 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base (brand background + default text color) */
+/* ============= Base (brand background + text) ============= */
 html, body {
   height: 100%;
   background: theme('colors.brand.stone');
   color: theme('colors.gray.800');
 }
 
-/* Layout helpers */
-.container { @apply mx-auto max-w-6xl px-4; }
-.section   { @apply py-10 md:py-16; } /* spacing rhythm */
+/* Smooth color transitions for interactive elements */
+a, button {
+  @apply transition-colors;
+}
 
-/* Buttons */
-.btn { @apply inline-flex items-center justify-center rounded-lg px-5 py-3 font-medium transition; }
+/* ============= Layout helpers ============= */
+.container { @apply mx-auto max-w-6xl px-4; }
+.section   { @apply py-10 md:py-16; } /* vertical rhythm for major sections */
+
+/* ============= Buttons ============= */
+/* Base button */
+.btn {
+  @apply inline-flex items-center justify-center rounded-lg px-5 py-3 font-medium transition
+         disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+/* Primary (forest) */
 .btn-primary {
   @apply bg-brand-forest text-white hover:bg-emerald-900
          focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-aqua/40;
 }
+
+/* Secondary (aqua) */
 .btn-secondary {
   @apply bg-brand-aqua text-white hover:opacity-90
          focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-aqua/40;
 }
+
+/* Ghost (subtle text action) */
 .btn-ghost {
   @apply text-brand-forest hover:bg-brand-aqua/10
          focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-aqua/40;
 }
 
-/* Card */
-.card { @apply rounded-xl border border-gray-200 bg-white p-6 shadow-card; }
+/* Loading variant helper (toggle with [data-loading="true"]) */
+.btn[data-loading="true"] {
+  @apply relative pointer-events-none opacity-75;
+}
+.btn[data-loading="true"]::after {
+  content: '';
+  @apply absolute inset-y-0 right-3 my-auto h-4 w-4 animate-spin rounded-full border-2 border-white/60 border-t-white;
+}
 
-/* Inputs */
+/* ============= Link utility (keeps links distinct from buttons) ============= */
+.link {
+  @apply underline underline-offset-2 decoration-brand-forest/40 hover:decoration-brand-forest
+         focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-aqua/40 rounded;
+}
+
+/* ============= Card ============= */
+.card {
+  @apply rounded-xl border border-gray-200 bg-white p-6 shadow-card;
+}
+
+/* ============= Forms ============= */
+.label { @apply mb-1 block text-sm font-medium text-gray-700; }
+
 .input {
   @apply h-11 w-full rounded-lg border border-gray-300 px-4
          text-gray-900 placeholder-gray-400
          focus:border-brand-forest focus:outline-none focus:ring-2 focus:ring-brand-aqua/30;
 }
-.label { @apply mb-1 block text-sm font-medium text-gray-700; }
+
+textarea.input {
+  @apply h-auto py-3;
+}
+
+select.input {
+  @apply pr-10;
+}
+
+/* Optional helper for inline help/error text */
+.form-hint { @apply mt-1 text-sm text-gray-500; }
+.form-error { @apply mt-1 text-sm text-red-600; }
