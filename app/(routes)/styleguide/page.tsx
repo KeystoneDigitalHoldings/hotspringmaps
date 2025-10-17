@@ -62,8 +62,11 @@ export default function StyleguidePage() {
         <div className="mt-12">
           <h2 className="text-2xl font-semibold">Links</h2>
           <p className="mt-2">
-            Default link with utility:{' '}
+            Default link with utility:{" "}
             <a className="link" href="/terms">Terms</a>
+          </p>
+          <p className="mt-3 text-sm text-gray-600">
+            Links use underline decoration, brand hover color, and focus-visible rings.
           </p>
         </div>
 
