@@ -15,6 +15,12 @@ const config: Config = {
           sand:   '#E9E6DD',
         },
       },
+      boxShadow: {
+        card: '0 1px 2px rgba(16,24,40,0.06), 0 1px 3px rgba(16,24,40,0.10)',
+      },
+      borderRadius: {
+        xl: '0.75rem',
+      },
     },
   },
   plugins: [],
