@@ -6,7 +6,7 @@ export default function StyleguidePage() {
         <h1 className="text-3xl font-semibold text-brand-forest">Styleguide</h1>
         <p className="mt-2 text-gray-700">
           Live design tokens & UI patterns for HotSpringMaps. Use this page to verify
-          colors, typography, buttons, cards, inputs, and spacing.
+          colors, typography, buttons, cards, inputs, links, and spacing.
         </p>
 
         {/* Colors */}
@@ -29,14 +29,11 @@ export default function StyleguidePage() {
             <h3 className="text-xl font-semibold">H3 — Subsection</h3>
             <p className="text-gray-700">
               Body — DM Sans with comfortable line-height. Use <code>text-gray-800</code> on
-              <code> bg-brand-stone</code> backgrounds. This paragraph demonstrates default
-              body text sizing and color.
+              <code> bg-brand-stone</code> backgrounds. This paragraph demonstrates default body text.
             </p>
             <p className="text-sm text-gray-600">Small — for captions & meta.</p>
             <div className="text-gray-700">
-              <p>
-                <strong>List example:</strong>
-              </p>
+              <p><strong>List example:</strong></p>
               <ul className="list-disc pl-6">
                 <li>Readable sizes & line-height</li>
                 <li>Consistent heading hierarchy (h1 → h3)</li>
@@ -53,13 +50,11 @@ export default function StyleguidePage() {
             <button className="btn btn-primary">Primary</button>
             <button className="btn btn-secondary">Secondary</button>
             <button className="btn btn-ghost">Ghost</button>
-            <button className="btn btn-primary" disabled>
-              Disabled
-            </button>
-            <a href="#" className="btn btn-secondary">Link as Button</a>
+            <button className="btn btn-primary" disabled>Disabled</button>
+            <button className="btn btn-primary" data-loading="true">Saving</button>
           </div>
           <p className="mt-3 text-sm text-gray-600">
-            Buttons include <code>focus-visible</code> rings for keyboard users.
+            Buttons include <code>focus-visible</code> rings for keyboard users and a loading state via <code>[data-loading="true"]</code>.
           </p>
         </div>
 
@@ -67,11 +62,8 @@ export default function StyleguidePage() {
         <div className="mt-12">
           <h2 className="text-2xl font-semibold">Links</h2>
           <p className="mt-2">
-            Default link:{' '}
-            <a className="underline hover:text-brand-forest focus-visible:ring-2 focus-visible:ring-brand-aqua/40 rounded"
-               href="#">
-              hover + focus-visible demo
-            </a>
+            Default link with utility:{' '}
+            <a className="link" href="/terms">Terms</a>
           </p>
         </div>
 
@@ -82,7 +74,7 @@ export default function StyleguidePage() {
             <div className="card">
               <h3 className="text-lg font-semibold">Card Title</h3>
               <p className="mt-2 text-gray-700">
-                Use <code>.card</code> for consistent padding, subtle border, and shadow.
+                Use <code>.card</code> for consistent padding, subtle border, and soft shadow.
               </p>
               <button className="mt-4 btn btn-secondary">Action</button>
             </div>
@@ -107,11 +99,11 @@ export default function StyleguidePage() {
             </div>
           </div>
           <p className="mt-3 text-sm text-gray-600">
-            Inputs include aqua focus rings and a forest focus border for clarity.
+            Inputs include aqua focus rings and a forest focus border.
           </p>
         </div>
 
-        {/* Spacing & Sections */}
+        {/* Sections & Spacing */}
         <div className="mt-12">
           <h2 className="text-2xl font-semibold">Sections & Spacing</h2>
           <p className="mt-2 text-gray-700">
