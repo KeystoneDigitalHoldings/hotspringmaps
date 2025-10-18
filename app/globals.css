@@ -66,28 +66,28 @@ a, button {
 }
 
 /* ============= Forms ============= */
+/* Labels */
 .label {
   @apply mb-1 block text-sm font-medium text-gray-700;
 }
 
+/* Text inputs */
 .input {
   @apply h-11 w-full rounded-lg border border-gray-300 px-4
          text-gray-900 placeholder-gray-400
          focus:border-brand-forest focus:outline-none focus:ring-2 focus:ring-brand-aqua/30;
 }
 
+/* Textarea variant (taller) */
 textarea.input {
   @apply h-auto py-3;
 }
 
+/* Select variant (space for caret) */
 select.input {
   @apply pr-10;
 }
 
-/* Inline help text */
-.form-hint {
-  @apply mt-1 text-sm text-gray-500;
-}
-.form-error {
-  @apply mt-1 text-sm text-red-600;
-}
+/* Inline help / error text */
+.form-hint  { @apply mt-1 text-sm text-gray-500; }
+.form-error { @apply mt-1 text-sm text-red-600; }
