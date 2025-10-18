@@ -54,7 +54,7 @@ export default function StyleguidePage() {
             <button className="btn btn-primary" data-loading="true">Saving</button>
           </div>
           <p className="mt-3 text-sm text-gray-600">
-            Buttons include <code>focus-visible</code> rings for keyboard users and a loading state via <code>[data-loading="true"]</code>.
+            Buttons include <code>focus-visible</code> rings and a loading state via <code>[data-loading="true"]</code>.
           </p>
         </div>
 
@@ -90,7 +90,7 @@ export default function StyleguidePage() {
           </div>
         </div>
 
-        {/* Inputs & Labels (verification) */}
+        {/* Inputs & Labels (with autocomplete/inputMode polish) */}
         <div className="mt-12">
           <h2 className="text-2xl font-semibold">Inputs</h2>
 
@@ -100,10 +100,12 @@ export default function StyleguidePage() {
               <label className="label" htmlFor="sg-email">Email</label>
               <input
                 id="sg-email"
+                name="email"
                 type="email"
                 className="input"
                 placeholder="you@example.com"
-                autoComplete="email"
+                autoComplete="email"   // helps desktop & mobile autofill
+                inputMode="email"      // mobile keyboard optimized for email
               />
               <p className="form-hint">We’ll never share your email.</p>
             </div>
@@ -111,7 +113,7 @@ export default function StyleguidePage() {
             {/* Select + error */}
             <div className="max-w-md">
               <label className="label" htmlFor="sg-region">Region</label>
-              <select id="sg-region" className="input">
+              <select id="sg-region" name="region" className="input" autoComplete="country">
                 <option value="">Select a region</option>
                 <option>Pacific Northwest</option>
                 <option>Rockies</option>
@@ -121,14 +123,31 @@ export default function StyleguidePage() {
               <p className="form-error">Please choose a region.</p>
             </div>
 
+            {/* Postal code (numeric keypad demo) */}
+            <div className="max-w-md">
+              <label className="label" htmlFor="sg-postal">Postal Code</label>
+              <input
+                id="sg-postal"
+                name="postal-code"
+                className="input"
+                placeholder="12345"
+                autoComplete="postal-code"
+                inputMode="numeric"   // numeric keypad on mobile
+                pattern="[0-9]*"      // reinforces numeric-only
+              />
+              <p className="form-hint">Numeric keypad should show on mobile.</p>
+            </div>
+
             {/* Textarea */}
             <div className="sm:col-span-2 max-w-2xl">
               <label className="label" htmlFor="sg-notes">Notes</label>
               <textarea
                 id="sg-notes"
+                name="notes"
                 className="input"
                 rows={4}
                 placeholder="Anything else we should know?"
+                autoComplete="off"
               />
             </div>
           </div>
@@ -139,7 +158,7 @@ export default function StyleguidePage() {
           </div>
 
           <p className="mt-3 text-sm text-gray-600">
-            Inputs show aqua focus rings and forest focus border when focused. Labels are associated via <code>htmlFor</code>/<code>id</code>.
+            Inputs show aqua focus rings and forest focus border when focused. Labels are associated via <code>htmlFor</code>/<code>id</code>. Autocomplete hints help browsers fill known fields; inputMode improves mobile keyboards.
           </p>
         </div>
 
