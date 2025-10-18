@@ -70,7 +70,7 @@ export default function StyleguidePage() {
           </p>
         </div>
 
-        {/* Card */}
+        {/* Cards */}
         <div className="mt-12">
           <h2 className="text-2xl font-semibold">Cards</h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -90,19 +90,56 @@ export default function StyleguidePage() {
           </div>
         </div>
 
-        {/* Inputs & Labels */}
+        {/* Inputs & Labels (verification) */}
         <div className="mt-12">
           <h2 className="text-2xl font-semibold">Inputs</h2>
-          <div className="mt-4 max-w-md space-y-3">
-            <label className="label" htmlFor="demo-email">Email</label>
-            <input id="demo-email" type="email" className="input" placeholder="you@example.com" />
-            <div className="mt-3 flex gap-3">
-              <button className="btn btn-primary">Submit</button>
-              <button className="btn btn-ghost">Cancel</button>
+
+          <div className="mt-4 grid gap-6 sm:grid-cols-2">
+            {/* Email input */}
+            <div className="max-w-md">
+              <label className="label" htmlFor="sg-email">Email</label>
+              <input
+                id="sg-email"
+                type="email"
+                className="input"
+                placeholder="you@example.com"
+                autoComplete="email"
+              />
+              <p className="form-hint">We’ll never share your email.</p>
+            </div>
+
+            {/* Select + error */}
+            <div className="max-w-md">
+              <label className="label" htmlFor="sg-region">Region</label>
+              <select id="sg-region" className="input">
+                <option value="">Select a region</option>
+                <option>Pacific Northwest</option>
+                <option>Rockies</option>
+                <option>New Zealand</option>
+                <option>Patagonia</option>
+              </select>
+              <p className="form-error">Please choose a region.</p>
+            </div>
+
+            {/* Textarea */}
+            <div className="sm:col-span-2 max-w-2xl">
+              <label className="label" htmlFor="sg-notes">Notes</label>
+              <textarea
+                id="sg-notes"
+                className="input"
+                rows={4}
+                placeholder="Anything else we should know?"
+              />
             </div>
           </div>
+
+          <div className="mt-4 flex gap-3">
+            <button className="btn btn-primary">Submit</button>
+            <button className="btn btn-ghost">Cancel</button>
+          </div>
+
           <p className="mt-3 text-sm text-gray-600">
-            Inputs include aqua focus rings and a forest focus border.
+            Inputs show aqua focus rings and forest focus border when focused. Labels are associated via <code>htmlFor</code>/<code>id</code>.
           </p>
         </div>
 
