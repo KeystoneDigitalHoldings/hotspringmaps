@@ -39,13 +39,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={dmSans.className}>
-        {/* Header appears on every page */}
+        {/* Accessibility: Skip link for keyboard users */}
+        <a href="#main-content" className="sr-only focus:not-sr-only">
+          Skip to main content
+        </a>
+
         <Header />
 
-        {/* Main page content area */}
-        <main className="container py-10">{children}</main>
+        {/* Main gets an id that the skip link targets */}
+        <main id="main-content" className="container py-10">
+          {children}
+        </main>
 
-        {/* Footer appears site-wide */}
         <Footer />
       </body>
     </html>
