@@ -35,11 +35,10 @@ function NavLink({
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const [user, setUser] = useState<any>(null); // store Supabase user object
-
+  const [user, setUser] = useState<any>(null);
   const pathname = usePathname();
 
-  // Fetch Supabase session + listen for auth changes
+  // Load auth session + subscribe to changes
   useEffect(() => {
     const init = async () => {
       const { data } = await supabase.auth.getSession();
@@ -54,10 +53,14 @@ export default function Header() {
     init();
   }, []);
 
-  // Close mobile menu on navigation / Esc
+  // Close the mobile menu when route changes
   useEffect(() => setOpen(false), [pathname]);
+
+  // Close on Esc globally (safety)
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, []);
@@ -75,13 +78,12 @@ export default function Header() {
           HotSpringMaps
         </Link>
 
-        {/* Desktop navigation */}
+        {/* Desktop nav */}
         <nav className="hidden items-center gap-1 md:flex">
           <NavLink href="/explore">Explore</NavLink>
           <NavLink href="/community">Community</NavLink>
           <NavLink href="/about">About</NavLink>
 
-          {/* Dynamic Account / Sign-in */}
           <div className="flex items-center gap-2">
             <NavLink href="/account">{user ? 'Account' : 'Sign in'}</NavLink>
             {user?.user_metadata?.avatar_url && (
@@ -95,13 +97,14 @@ export default function Header() {
           </div>
         </nav>
 
-        {/* Hamburger (mobile) */}
+        {/* Mobile hamburger */}
         <button
           type="button"
-          aria-label="Open menu"
+          aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
+          aria-controls="mobile-nav"   /* Accessibility: link button to drawer */
           onClick={() => setOpen(!open)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-300 bg-white text-gray-700 transition hover:border-brand-forest hover:text-brand-forest md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-300 bg-white text-gray-700 transition hover:border-brand-forest hover:text-brand-forest focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-aqua/40 md:hidden"
         >
           <svg
             className={`h-5 w-5 transition ${open ? 'rotate-90' : ''}`}
@@ -122,30 +125,14 @@ export default function Header() {
 
       {/* Mobile drawer */}
       {open && (
-        <div className="border-t border-gray-200 bg-white md:hidden">
+        <div id="mobile-nav" className="border-t border-gray-200 bg-white md:hidden">
           <nav className="container grid gap-1 py-2">
-            <NavLink href="/explore" onClick={() => setOpen(false)}>
-              Explore
+            <NavLink href="/explore" onClick={() => setOpen(false)}>Explore</NavLink>
+            <NavLink href="/community" onClick={() => setOpen(false)}>Community</NavLink>
+            <NavLink href="/about" onClick={() => setOpen(false)}>About</NavLink>
+            <NavLink href="/account" onClick={() => setOpen(false)}>
+              {user ? 'Account' : 'Sign in'}
             </NavLink>
-            <NavLink href="/community" onClick={() => setOpen(false)}>
-              Community
-            </NavLink>
-            <NavLink href="/about" onClick={() => setOpen(false)}>
-              About
-            </NavLink>
-            <div className="flex items-center gap-2 px-3 py-2">
-              <NavLink href="/account" onClick={() => setOpen(false)}>
-                {user ? 'Account' : 'Sign in'}
-              </NavLink>
-              {user?.user_metadata?.avatar_url && (
-                <img
-                  src={user.user_metadata.avatar_url}
-                  alt="User avatar"
-                  referrerPolicy="no-referrer"
-                  className="h-8 w-8 rounded-full border border-gray-300"
-                />
-              )}
-            </div>
           </nav>
         </div>
       )}
