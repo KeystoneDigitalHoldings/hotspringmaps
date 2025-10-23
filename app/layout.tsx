@@ -37,16 +37,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="overflow-x-hidden">
       <body className={dmSans.className}>
-        {/* Accessibility: Skip link for keyboard users */}
+        {/* Keyboard a11y: Skip directly to <main> */}
         <a href="#main-content" className="sr-only focus:not-sr-only">
           Skip to main content
         </a>
 
         <Header />
 
-        {/* Main gets an id that the skip link targets */}
+        {/* The #main-content id is the skip link’s target */}
         <main id="main-content" className="container py-10">
           {children}
         </main>
