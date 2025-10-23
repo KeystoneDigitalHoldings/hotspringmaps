@@ -6,7 +6,7 @@ export default function StyleguidePage() {
         <h1 className="text-3xl font-semibold text-brand-forest">Styleguide</h1>
         <p className="mt-2 text-gray-700">
           Live design tokens & UI patterns for HotSpringMaps. Use this page to verify
-          colors, typography, buttons, cards, inputs, links, and spacing.
+          colors, typography, buttons, cards, inputs, links, spacing, and long text wrapping.
         </p>
 
         {/* Colors */}
@@ -14,7 +14,7 @@ export default function StyleguidePage() {
           <h2 className="text-2xl font-semibold">Colors</h2>
           <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
             <Swatch name="brand.forest" className="bg-brand-forest" hex="#2E5538" />
-            <Swatch name="brand.aqua"   className="bg-brand-aqua"   hex="#4CBEBE" />
+            <Swatch name="brand.aqua"   className="bg-brand-aqua"   hex="#36A8A8" />
             <Swatch name="brand.stone"  className="bg-brand-stone border" hex="#F5F5F0" />
             <Swatch name="brand.sand"   className="bg-brand-sand border"  hex="#E9E6DD" />
           </div>
@@ -90,10 +90,9 @@ export default function StyleguidePage() {
           </div>
         </div>
 
-        {/* Inputs & Labels (with autocomplete/inputMode polish) */}
+        {/* Inputs & Labels */}
         <div className="mt-12">
           <h2 className="text-2xl font-semibold">Inputs</h2>
-
           <div className="mt-4 grid gap-6 sm:grid-cols-2">
             {/* Email input */}
             <div className="max-w-md">
@@ -104,8 +103,8 @@ export default function StyleguidePage() {
                 type="email"
                 className="input"
                 placeholder="you@example.com"
-                autoComplete="email"   // helps desktop & mobile autofill
-                inputMode="email"      // mobile keyboard optimized for email
+                autoComplete="email"
+                inputMode="email"
               />
               <p className="form-hint">We’ll never share your email.</p>
             </div>
@@ -132,8 +131,8 @@ export default function StyleguidePage() {
                 className="input"
                 placeholder="12345"
                 autoComplete="postal-code"
-                inputMode="numeric"   // numeric keypad on mobile
-                pattern="[0-9]*"      // reinforces numeric-only
+                inputMode="numeric"
+                pattern="[0-9]*"
               />
               <p className="form-hint">Numeric keypad should show on mobile.</p>
             </div>
@@ -158,7 +157,7 @@ export default function StyleguidePage() {
           </div>
 
           <p className="mt-3 text-sm text-gray-600">
-            Inputs show aqua focus rings and forest focus border when focused. Labels are associated via <code>htmlFor</code>/<code>id</code>. Autocomplete hints help browsers fill known fields; inputMode improves mobile keyboards.
+            Inputs show aqua focus rings and forest focus border when focused. Labels are associated via <code>htmlFor</code>/<code>id</code>.
           </p>
         </div>
 
@@ -173,6 +172,33 @@ export default function StyleguidePage() {
             <div className="card">Section block A</div>
             <div className="card">Section block B</div>
             <div className="card">Section block C</div>
+          </div>
+        </div>
+
+        {/* Long Text Wrapping (verification) */}
+        <div className="mt-12">
+          <h2 className="text-2xl font-semibold">Long Text Wrapping</h2>
+
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            {/* Using .break-content helper */}
+            <div className="card break-content">
+              <p className="text-sm text-gray-600">
+                This card uses <code>.break-content</code> to wrap extremely long strings/URLs:
+              </p>
+              <p className="mt-2">
+                https://averyveryveryverylongurl-without-dashes-or-spaces-that-would-normally-cause-horizontal-scroll.com/path?q=superlongparamvalue1234567890
+              </p>
+            </div>
+
+            {/* Using Tailwind's built-in break-words utility */}
+            <div className="card">
+              <p className="text-sm text-gray-600">
+                This paragraph uses Tailwind’s built-in <code>break-words</code>:
+              </p>
+              <p className="mt-2 break-words">
+                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+              </p>
+            </div>
           </div>
         </div>
       </div>
