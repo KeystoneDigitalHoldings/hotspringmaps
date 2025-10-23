@@ -2,13 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ============= Base ============= */
+/* ============= Base (global responsive rules) ============= */
 @layer base {
+  /* Prevent stray horizontal scroll */
   html, body { @apply overflow-x-hidden; }
+
+  /* Make media shrink to fit container; keep aspect ratio */
   img, video { @apply max-w-full h-auto; }
   iframe { @apply max-w-full; }
 }
 
+/* ============= Brand base ============= */
 html, body {
   height: 100%;
   background: theme('colors.brand.stone');
@@ -23,8 +27,7 @@ a, button { @apply transition-colors; }
 .card      { @apply rounded-xl border border-gray-200 bg-white p-6 shadow-card; }
 
 /* ============= Long text wrapping helper ============= */
-/* Use this on any block that may contain very long URLs or unbroken strings */
-.break-content { @apply break-words; }     /* Consider 'break-all' only if needed */
+.break-content { @apply break-words; }
 
 /* ============= Buttons ============= */
 .btn {
