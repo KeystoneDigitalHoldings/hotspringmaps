@@ -6,7 +6,7 @@ export default function StyleguidePage() {
         <h1 className="text-3xl font-semibold text-brand-forest">Styleguide</h1>
         <p className="mt-2 text-gray-700">
           Live design tokens & UI patterns for HotSpringMaps. Use this page to verify
-          colors, typography, buttons, cards, inputs, links, spacing, and long text wrapping.
+          colors, typography, buttons, cards, inputs, links, spacing, and media responsiveness.
         </p>
 
         {/* Colors */}
@@ -94,7 +94,6 @@ export default function StyleguidePage() {
         <div className="mt-12">
           <h2 className="text-2xl font-semibold">Inputs</h2>
           <div className="mt-4 grid gap-6 sm:grid-cols-2">
-            {/* Email input */}
             <div className="max-w-md">
               <label className="label" htmlFor="sg-email">Email</label>
               <input
@@ -109,7 +108,6 @@ export default function StyleguidePage() {
               <p className="form-hint">We’ll never share your email.</p>
             </div>
 
-            {/* Select + error */}
             <div className="max-w-md">
               <label className="label" htmlFor="sg-region">Region</label>
               <select id="sg-region" name="region" className="input" autoComplete="country">
@@ -122,7 +120,6 @@ export default function StyleguidePage() {
               <p className="form-error">Please choose a region.</p>
             </div>
 
-            {/* Postal code (numeric keypad demo) */}
             <div className="max-w-md">
               <label className="label" htmlFor="sg-postal">Postal Code</label>
               <input
@@ -137,7 +134,6 @@ export default function StyleguidePage() {
               <p className="form-hint">Numeric keypad should show on mobile.</p>
             </div>
 
-            {/* Textarea */}
             <div className="sm:col-span-2 max-w-2xl">
               <label className="label" htmlFor="sg-notes">Notes</label>
               <textarea
@@ -161,43 +157,37 @@ export default function StyleguidePage() {
           </p>
         </div>
 
-        {/* Sections & Spacing */}
+        {/* Embeds (Responsive Iframe Demos) */}
         <div className="mt-12">
-          <h2 className="text-2xl font-semibold">Sections & Spacing</h2>
-          <p className="mt-2 text-gray-700">
-            Sections use <code>.section</code>: <code>py-10 md:py-16</code>. Containers use{' '}
-            <code>.container</code>: <code>max-w-6xl mx-auto px-4</code>.
-          </p>
-          <div className="mt-4 space-y-6">
-            <div className="card">Section block A</div>
-            <div className="card">Section block B</div>
-            <div className="card">Section block C</div>
-          </div>
-        </div>
+          <h2 className="text-2xl font-semibold">Embeds (Responsive Iframes)</h2>
 
-        {/* Long Text Wrapping (verification) */}
-        <div className="mt-12">
-          <h2 className="text-2xl font-semibold">Long Text Wrapping</h2>
-
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            {/* Using .break-content helper */}
-            <div className="card break-content">
-              <p className="text-sm text-gray-600">
-                This card uses <code>.break-content</code> to wrap extremely long strings/URLs:
-              </p>
-              <p className="mt-2">
-                https://averyveryveryverylongurl-without-dashes-or-spaces-that-would-normally-cause-horizontal-scroll.com/path?q=superlongparamvalue1234567890
-              </p>
+          {/* YouTube Embed */}
+          <div className="mt-4 card">
+            <h3 className="text-lg font-semibold">YouTube (Responsive)</h3>
+            <div className="relative w-full overflow-hidden rounded-xl">
+              <iframe
+                className="w-full max-w-full"
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                title="Demo video"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
             </div>
+          </div>
 
-            {/* Using Tailwind's built-in break-words utility */}
-            <div className="card">
-              <p className="text-sm text-gray-600">
-                This paragraph uses Tailwind’s built-in <code>break-words</code>:
-              </p>
-              <p className="mt-2 break-words">
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-              </p>
+          {/* Map Embed */}
+          <div className="mt-6 card">
+            <h3 className="text-lg font-semibold">Map Embed (Responsive)</h3>
+            <div className="relative w-full overflow-hidden rounded-xl">
+              <iframe
+                className="w-full max-w-full"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-122.52,37.70,-122.35,37.83&layer=mapnik"
+                title="Map embed"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
             </div>
           </div>
         </div>
