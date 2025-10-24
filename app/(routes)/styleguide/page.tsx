@@ -1,5 +1,3 @@
-import ResponsiveIframe from '@/components/ResponsiveIframe';
-
 export default function StyleguidePage() {
   return (
     <section className="section">
@@ -8,7 +6,7 @@ export default function StyleguidePage() {
         <h1 className="text-3xl font-semibold text-brand-forest">Styleguide</h1>
         <p className="mt-2 text-gray-700">
           Live design tokens & UI patterns for HotSpringMaps. Use this page to verify
-          colors, typography, buttons, cards, inputs, links, spacing, and responsive iframes.
+          colors, typography, buttons, cards, inputs, links, spacing, and responsive embeds.
         </p>
 
         {/* Colors */}
@@ -47,6 +45,41 @@ export default function StyleguidePage() {
             <button className="btn btn-primary" disabled>Disabled</button>
             <button className="btn btn-primary" data-loading="true">Saving</button>
           </div>
+          <p className="mt-3 text-sm text-gray-600">
+            Buttons include <code>focus-visible</code> rings and a loading state via <code>[data-loading="true"]</code>.
+          </p>
+        </div>
+
+        {/* Links */}
+        <div className="mt-12">
+          <h2 className="text-2xl font-semibold">Links</h2>
+          <p className="mt-2">
+            Default link with utility:{" "}
+            <a className="link" href="/terms">Terms</a>
+          </p>
+          <p className="mt-3 text-sm text-gray-600">
+            Links use underline decoration, brand hover color, and focus-visible rings.
+          </p>
+        </div>
+
+        {/* Cards */}
+        <div className="mt-12">
+          <h2 className="text-2xl font-semibold">Cards</h2>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <div className="card">
+              <h3 className="text-lg font-semibold">Card Title</h3>
+              <p className="mt-2 text-gray-700">
+                Use <code>.card</code> for consistent padding, subtle border, and soft shadow.
+              </p>
+              <button className="mt-4 btn btn-secondary">Action</button>
+            </div>
+            <div className="card">
+              <h3 className="text-lg font-semibold">Another Card</h3>
+              <p className="mt-2 text-gray-700">
+                Cards are great for tiles, result items, and spring info blocks.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Inputs */}
@@ -73,31 +106,27 @@ export default function StyleguidePage() {
           </div>
         </div>
 
-        {/* Responsive Iframes */}
+        {/* Embeds — Using Tailwind aspect-video */}
         <div className="mt-12">
-          <h2 className="text-2xl font-semibold">Responsive Iframes</h2>
+          <h2 className="text-2xl font-semibold">Embeds (Responsive 16:9 Video)</h2>
+          <p className="mt-2 text-gray-700">This section uses Tailwind’s <code>aspect-video</code> utility for responsive embeds.</p>
 
           <div className="mt-4 card">
-            <h3 className="text-lg font-semibold">YouTube (16:9)</h3>
-            <ResponsiveIframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-              title="Demo video"
-              ratio="16/9"
-            />
-          </div>
-
-          <div className="mt-6 card">
-            <h3 className="text-lg font-semibold">Map Embed (4:3)</h3>
-            <ResponsiveIframe
-              src="https://www.openstreetmap.org/export/embed.html?bbox=-122.52,37.70,-122.35,37.83&layer=mapnik"
-              title="Map embed"
-              ratio="4/3"
-            />
+            <h3 className="text-lg font-semibold">YouTube Demo</h3>
+            <div className="relative w-full overflow-hidden rounded-xl aspect-video">
+              <iframe
+                className="absolute inset-0 h-full w-full"
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                title="Demo video"
+                loading="lazy"
+                allowFullScreen
+              />
+            </div>
           </div>
         </div>
       </div>
     </section>
-  );
+  )
 }
 
 /* Subcomponent for color swatches */
