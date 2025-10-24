@@ -1,3 +1,5 @@
+import type { HTMLAttributeReferrerPolicy } from 'react';
+
 type ResponsiveIframeProps = {
   src: string;
   title: string;
@@ -5,7 +7,7 @@ type ResponsiveIframeProps = {
   ratio?: '16/9' | '4/3' | '1/1' | string;
   allowFullScreen?: boolean;
   loading?: 'lazy' | 'eager';
-  referrerPolicy?: string;
+  referrerPolicy?: HTMLAttributeReferrerPolicy; // 👈 correct React type
   className?: string;
 };
 
@@ -15,7 +17,7 @@ export default function ResponsiveIframe({
   ratio = '16/9',
   allowFullScreen = true,
   loading = 'lazy',
-  referrerPolicy = 'no-referrer-when-downgrade',
+  referrerPolicy = 'no-referrer-when-downgrade', // 👈 default as a literal in the union
   className = '',
 }: ResponsiveIframeProps) {
   // Map common ratios to padding-top (height/width * 100)
