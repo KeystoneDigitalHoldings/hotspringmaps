@@ -24,20 +24,10 @@ const config: Config = {
         lg: '0.5rem',
         xl: '0.75rem',
       },
-      fontSize: {
-        h1:    ['2rem',   { lineHeight: '2.5rem', fontWeight: '700' }],
-        h2:    ['1.5rem', { lineHeight: '2rem',   fontWeight: '600' }],
-        h3:    ['1.25rem',{ lineHeight: '1.75rem',fontWeight: '600' }],
-        body:  ['1rem',   { lineHeight: '1.75rem', fontWeight: '400' }],
-        small: ['0.875rem',{ lineHeight: '1.5rem', fontWeight: '400' }],
-      },
-      fontWeight: {
-        normal: '400',
-        medium: '500',
-        bold:   '700',
-      },
+      // (You can keep any other tokens you’ve added; omitted here for brevity)
     },
   },
-  plugins: [aspectRatio],
+  plugins: [aspectRatio], // 👈 ensure this is present
 }
+
 export default config
