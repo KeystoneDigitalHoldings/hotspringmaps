@@ -123,6 +123,12 @@ export default function StyleguidePage() {
               />
             </div>
           </div>
+
+          {/* Aspect plugin test — should render a shallow aqua rectangle in 16:9 */}
+          <div className="mt-6 card">
+            <h3 className="text-lg font-semibold">Aspect Plugin Test</h3>
+            <div className="relative w-full overflow-hidden rounded-xl aspect-video bg-brand-aqua/40" />
+          </div>
         </div>
       </div>
     </section>
